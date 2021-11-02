@@ -9,19 +9,8 @@ import {
   useThree,
 } from "@react-three/fiber";
 import "tailwindcss/tailwind.css";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { FirstPersonControls } from "@react-three/drei";
 
-extend({ OrbitControls });
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      orbitControls: ReactThreeFiber.Object3DNode<
-        OrbitControls,
-        typeof OrbitControls
-      >;
-    }
-  }
-}
 const CameraControls = () => {
   // Get a reference to the Three.js Camera, and the canvas html element.
   // We need these to setup the OrbitControls class.
@@ -33,33 +22,52 @@ const CameraControls = () => {
   } = useThree();
 
   // Ref to the controls, so that we can update them on every frame using useFrame
-  const controls = React.useRef();
-  useFrame((state) => controls.current.update());
   return (
-    <orbitControls
-      ref={controls}
-      args={[camera, domElement]}
-      enableZoom={false}
-      maxAzimuthAngle={Math.PI / 4}
-      maxPolarAngle={Math.PI}
-      minAzimuthAngle={-Math.PI / 4}
-      minPolarAngle={0}
+    // <flyControls
+    //   args={[camera, domElement]}
+    //   movementSpeed={1000}
+    //   rollSpeed={Math.PI / 24}
+    //   dragToLook={false}
+    //   autoForward={false}
+
+    //   // enableZoom={false}
+    //   // maxAzimuthAngle={Math.PI / 4}
+    //   // maxPolarAngle={Math.PI}
+    //   // minAzimuthAngle={-Math.PI / 4}
+    //   // minPolarAngle={0}
+    // />
+    <FirstPersonControls
+      activeLook={true}
+      autoForward={false}
+      constrainVertical={false}
+      enabled={true}
+      heightCoef={1}
+      heightMax={1}
+      heightMin={0}
+      heightSpeed={false}
+      lookVertical={true}
+      lookSpeed={0.1}
+      movementSpeed={1}
+      verticalMax={Math.PI}
+      verticalMin={0}
     />
   );
 };
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <div className="bg-black w-full h-screen">
+    // <div className="bg-black w-full h-screen">
+    <div className="h-screen bg-black">
       <Canvas>
         <axesHelper />
-        <CameraControls />
         <ambientLight />
         <pointLight position={[0, 0, 0]} />
         <perspectiveCamera aspect={1200 / 600} fov={45} position={[0, 0, 2]} />
         <Component {...pageProps} />
+        <CameraControls />
       </Canvas>
     </div>
+    // </div>
   );
 }
 

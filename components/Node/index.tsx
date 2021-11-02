@@ -4,9 +4,10 @@ import { useFrame } from "@react-three/fiber";
 interface INode {
   size: number[];
   coords: number[];
+  color?: string;
 }
 
-const Node: React.FC<INode> = ({ size, coords }) => {
+const Node: React.FC<INode> = ({ size, coords, color = "pink" }) => {
   const ref = React.useRef<any>();
   const [hovered, setHovered] = React.useState<boolean>(false);
   const [active, setActive] = React.useState<boolean>(false);
@@ -29,15 +30,15 @@ const Node: React.FC<INode> = ({ size, coords }) => {
   return (
     <>
       <mesh
-        position={coords}
+        position={[coords[0], coords[1], coords[2]]}
         ref={ref}
-        scale={active ? 1.5 : 1}
+        // scale={active ? 1.5 : 1}
         onClick={(e) => setActive(!active)}
         onPointerOver={(e) => setHovered(true)}
         onPointerOut={(e) => setHovered(false)}
       >
-        <sphereGeometry args={size} />
-        <meshStandardMaterial color={hovered ? "hotpink" : "pink"} />
+        <sphereGeometry args={[size[0], size[1], size[2]]} />
+        <meshStandardMaterial color={hovered ? "hotpink" : color} />
       </mesh>
     </>
   );
