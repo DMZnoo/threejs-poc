@@ -6,7 +6,7 @@ interface IEdge {
   coords: [x: number, y: number, z: number];
   nextCoords: [x: number, y: number, z: number];
 }
-interface ILine {
+interface ILine extends React.SVGProps<SVGLineElement> {
   position: number[];
 }
 const Line = styled.line<ILine>``;

@@ -22,8 +22,8 @@ const Home: NextPage = () => {
         z = Math.random() * 10 - 5;
 
       // const x = 0,
-      //   y = 0,
-      //   z = 1;
+      //   y = 1,
+      //   z = 0;
 
       const x1 = Math.random() * 10 - 5;
       const y1 = Math.random() * 10 - 5;
@@ -39,11 +39,7 @@ const Home: NextPage = () => {
       );
 
       edgesArr.push(
-        <Edge
-          key={"edge-" + i}
-          coords={[x / 2, y / 2, z / 2]}
-          nextCoords={[x1 - x / 2, y1 - y / 2, z1 - z / 2]}
-        />
+        <Edge key={"edge-" + i} coords={[x, y, z]} nextCoords={[x1, y1, z1]} />
       );
 
       nodesArr.push(
