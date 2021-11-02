@@ -1,16 +1,9 @@
-import { useFrame } from "@react-three/fiber";
 import * as React from "react";
 import * as THREE from "three";
-import styled from "styled-components";
 interface IEdge {
   coords: [x: number, y: number, z: number];
   nextCoords: [x: number, y: number, z: number];
 }
-interface ILine extends React.SVGProps<SVGLineElement> {
-  position: number[];
-}
-const Line = styled.line<ILine>``;
-
 const Edge: React.FC<IEdge> = ({ coords, nextCoords }) => {
   const ref = React.useRef<any>();
 
@@ -41,7 +34,7 @@ const Edge: React.FC<IEdge> = ({ coords, nextCoords }) => {
         onPointerOut={(e) => setHovered(false)}
       > */}
       {/* <cylinderGeometry /> */}
-      <Line position={coords}>
+      <line>
         <bufferGeometry attach="geometry" onUpdate={onUpdate} />
         <lineBasicMaterial
           attach="material"
@@ -51,7 +44,7 @@ const Edge: React.FC<IEdge> = ({ coords, nextCoords }) => {
           linejoin={"round"}
         />
         {/* <lineBasicMaterial color={hovered ? "hotpink" : "darkOrange"} /> */}
-      </Line>
+      </line>
       {/* </mesh> */}
     </>
   );
