@@ -5,11 +5,14 @@ export type AppContextProps = {
   toggleEdges: () => void;
   goCrazy: boolean;
   toggleGoCrazy: () => void;
+  nodeCount: number;
+  setNodeCount: (val: number) => void;
 };
 
 const useApp = (): AppContextProps => {
   const [showEdges, setShowEdges] = React.useState<boolean>(false);
   const [goCrazy, setGoCrazy] = React.useState<boolean>(false);
+  const [nodeCount, setNodeCount] = React.useState<number>(0);
 
   const toggleEdges = () => setShowEdges(!showEdges);
   const toggleGoCrazy = () => setGoCrazy(!goCrazy);
@@ -18,7 +21,9 @@ const useApp = (): AppContextProps => {
     showEdges,
     toggleEdges,
     toggleGoCrazy,
-    goCrazy
+    goCrazy,
+    nodeCount,
+    setNodeCount
   }
 
 };

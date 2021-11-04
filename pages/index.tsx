@@ -52,7 +52,14 @@ const CameraControls = () => {
 
 const Home: NextPage = () => {
   const context = useApp();
-  const { showEdges, toggleEdges, goCrazy, toggleGoCrazy } = context;
+  const {
+    showEdges,
+    toggleEdges,
+    goCrazy,
+    toggleGoCrazy,
+    setNodeCount,
+    nodeCount,
+  } = context;
   // const [edges, setEdges] = React.useState<any[]>();
   // const [nodes, setNodes] = React.useState<any[]>();
 
@@ -98,15 +105,22 @@ const Home: NextPage = () => {
   // }, []);
 
   return (
-    <div className="h-screen bg-white">
+    <div className="h-screen bg-white overflow-y-hidden">
       {/* <Node size={[1, 100, 100]} coords={[0, 0, 0]} /> */}
       {/* <Node size={[1, 100, 100]} coords={[5, 0, 0]} /> */}
-      <button className="bg-blue-400 w-20" onClick={() => toggleEdges()}>
-        {showEdges ? "Hide" : "Show"} Edges
-      </button>
-      <button className="bg-blue-400 w-20" onClick={() => toggleGoCrazy()}>
-        {goCrazy ? "That was Enough" : "Go Crazy"}
-      </button>
+      <div className="flex bg-green-200">
+        <button className="bg-blue-400 w-20" onClick={() => toggleEdges()}>
+          {showEdges ? "Hide" : "Show"} Edges
+        </button>
+        <button className="bg-blue-400 w-20" onClick={() => toggleGoCrazy()}>
+          {goCrazy ? "That was Enough" : "Go Crazy"}
+        </button>
+        <input
+          type="number"
+          placeholder="Set Batch Count"
+          onChange={(e) => setNodeCount(Number(e.currentTarget.value))}
+        />
+      </div>
       <Canvas>
         <AppContext.Provider value={context}>
           <axesHelper />
@@ -118,7 +132,7 @@ const Home: NextPage = () => {
             position={[0, 0, 2]}
           />
           <Node size={[1, 100, 100]} coords={[-5, 0, 0]} />
-          <BatchNodes size={100} nodeConfig={[0.1, 100, 100]} />
+          <BatchNodes size={nodeCount} nodeConfig={[0.1, 100, 100]} />
           <CameraControls />
         </AppContext.Provider>
       </Canvas>

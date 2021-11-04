@@ -16,7 +16,7 @@ const BatchNodes: React.FC<IBatchNodes> = ({ nodeConfig, size }) => {
   const [hovered, setHovered] = React.useState<boolean>(false);
   const [active, setActive] = React.useState<boolean>(false);
   const [edges, setEdges] = React.useState<React.ReactElement[]>();
-  const { goCrazy } = React.useContext<AppContextProps>(AppContext);
+  const { goCrazy, nodeCount } = React.useContext<AppContextProps>(AppContext);
 
   const setNodePositionAndEdges = () => {
     const edgesArr = [];
@@ -51,7 +51,7 @@ const BatchNodes: React.FC<IBatchNodes> = ({ nodeConfig, size }) => {
 
   React.useEffect(() => {
     setNodePositionAndEdges();
-  }, []);
+  }, [nodeCount]);
 
   useFrame(() => {
     goCrazy && setNodePositionAndEdges();
