@@ -57,7 +57,7 @@ const CameraControls = () => {
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     // <div className="bg-black w-full h-screen">
-    <div className="h-screen bg-black">
+    <div className="h-screen bg-white">
       <Canvas>
         <axesHelper />
         <ambientLight />
